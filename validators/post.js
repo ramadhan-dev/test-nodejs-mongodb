@@ -7,21 +7,19 @@ exports.createPost = (req, res, next) => {
 	})
 
 	// body
-	req.check("body","Write a body").notEmpty()
-	req.check("body","Body must between 4 to 2000 character").isLength({
+	req.check("body", "Write a body").notEmpty()
+	req.check("body", "Body must between 4 to 2000 character").isLength({
 		min: 4,
 		max: 2000
 	})
 
 	// check error
 	const errors = req.validationErrors()
-	
 	if (errors) {
-		const error = errors.map( error => {
-//			const name = error.param
-//			const value = error.msg
-//			return {'param' : name, 'message' : value} 
-			return { [error.param]: error.msg }
+		const error = errors.map(error => {
+			return {
+				[error.param]: error.msg
+			}
 		})
 		return res.status(200).json({
 			error: error
