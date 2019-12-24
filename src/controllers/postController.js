@@ -1,13 +1,13 @@
 const Post = require("./../models/post")
 
 exports.getPost = (req, res) => {
-	Post.find().then( posts => {
+	Post.find().then(posts => {
 		res.json({
 			data: posts,
 			message: 'Success',
 			status: res.statusCode
 		})
-	}).catch( err => {
+	}).catch(err => {
 		console.log(err)
 	})
 }
@@ -15,17 +15,16 @@ exports.getPost = (req, res) => {
 exports.pagePost = (req, res) => {
 	const id = req.params.id
 	Post.findById(id, (err, result) => {
-		if(err) {
+		if (err) {
 			console.log(err)
 		}
 		res.send(result);
 	})
 }
 
-exports.createPost = (req, res ) => {
+exports.createPost = (req, res) => {
 	const post = new Post(req.body)
-
-	post.save( (err, result) => {
+	post.save((err, result) => {
 		if (err) {
 			return res.status(400).json({
 				error: err
@@ -36,6 +35,5 @@ exports.createPost = (req, res ) => {
 			message: result
 		})
 	})
-	
-}
 
+}
